@@ -1,0 +1,10 @@
+question_id,question_text,scale,response_format
+PHQ9_Q1,Little interest or pleasure in doing things,PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q2,"Feeling down, depressed, or hopeless",PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q3,"Trouble falling or staying asleep, or sleeping too much",PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q4,Feeling tired or having little energy,PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q5,Poor appetite or overeating,PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q6,Feeling bad about yourself — or that you are a failure or have let yourself or your family down,PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q7,"Trouble concentrating on things, such as reading the newspaper or watching television",PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q8,Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual,PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+PHQ9_Q9,Thoughts that you would be better off dead or of hurting yourself in some way,PHQ-9,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"

@@ -1,0 +1,6 @@
+student_id,name,college,course,year,preferred_language,phq9_baseline,gad7_baseline,risk_level,anxiety_level
+STU001,Arjun Sharma,IIT Delhi,Computer Science,2,Hindi,7,9,Mild Depression,Mild Anxiety
+STU002,Priya Patel,DU North Campus,Psychology,1,English,12,14,Moderate Depression,Moderate Anxiety
+STU003,Rohit Kumar,Jadavpur University,Engineering,3,Bengali,4,2,Minimal Symptoms,Minimal Anxiety
+STU004,Anita Singh,University of Mumbai,Arts,2,English,15,11,Moderately Severe Depression,Moderate Anxiety
+STU005,Vikram Reddy,BITS Pilani,Mechanical Engineering,4,Telugu,8,6,Mild Depression,Mild Anxiety

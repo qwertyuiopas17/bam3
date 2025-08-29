@@ -1,0 +1,5 @@
+conversation_id,user_message,ai_response_type,risk_level,escalation_needed,language_detected
+CONV001,I've been feeling really down lately and can't seem to focus on my studies,Supportive + CBT technique,Low,False,English
+CONV002,मुझे बहुत चिंता हो रही है परीक्षा को लेकर (I'm very worried about the exams),Multilingual support + coping strategy,Low,False,Hindi
+CONV003,"I don't feel like talking to anyone, I just want to be alone all the time",Gentle engagement + social connection,Moderate,False,English
+CONV004,Sometimes I wonder if things would be better if I wasn't here,Crisis intervention + professional referral,High,True,English

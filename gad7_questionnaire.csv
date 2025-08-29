@@ -1,0 +1,8 @@
+question_id,question_text,scale,response_format
+GAD7_Q1,"Feeling nervous, anxious or on edge",GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+GAD7_Q2,Not being able to stop or control worrying,GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+GAD7_Q3,Worrying too much about different things,GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+GAD7_Q4,Trouble relaxing,GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+GAD7_Q5,Being so restless that it is hard to sit still,GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+GAD7_Q6,Becoming easily annoyed or irritable,GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"
+GAD7_Q7,Feeling afraid as if something awful might happen,GAD-7,"0-3 scale: Not at all (0), Several days (1), More than half the days (2), Nearly every day (3)"

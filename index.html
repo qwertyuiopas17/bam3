@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>βaspirin - Digital Mental Health Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav__container">
+                <div class="nav__brand" data-key="welcome_title">βaspirin</div>
+                <div class="nav__controls">
+                    <select id="languageSelect" class="form-control language-select">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                    <button id="loginBtn" class="btn btn-secondary" data-key="login">Student Login</button>
+                    <button id="registerBtn" class="btn" data-key="register">Register</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Landing Screen -->
+        <div id="landingScreen" class="screen active">
+            <div class="hero-section">
+                <h1 class="hero-title" data-key="welcome_title">Welcome to βaspirin</h1>
+                <p class="hero-subtitle" data-key="welcome_subtitle">Your Digital Mental Health Support System</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" data-screen="assessmentScreen">
+                    <div class="feature-icon">📋</div>
+                    <h3 data-key="take_assessment">Take Assessment</h3>
+                    <p data-key="assessment_description">Complete PHQ-9 and GAD-7 screenings to understand your mental health</p>
+                </div>
+
+                <div class="feature-card" data-screen="chatScreen">
+                    <div class="feature-icon">💬</div>
+                    <h3 data-key="ai_support_chat">AI Support Chat</h3>
+                    <p data-key="chat_description">Get immediate support and coping strategies from our AI assistant</p>
+                </div>
+
+                <div class="feature-card" data-screen="resourcesScreen">
+                    <div class="feature-icon">📚</div>
+                    <h3 data-key="resource_library">Resource Library</h3>
+                    <p data-key="resources_description">Access CBT modules, mindfulness practices, and educational content</p>
+                </div>
+
+                <div class="feature-card" data-screen="bookingScreen">
+                    <div class="feature-icon">📞</div>
+                    <h3 data-key="book_appointment">Book Appointment</h3>
+                    <p data-key="booking_description">Schedule sessions with qualified counselors and therapists</p>
+                </div>
+
+                <div class="feature-card" data-screen="dashboardScreen">
+                    <div class="feature-icon">📊</div>
+                    <h3 data-key="my_dashboard">My Dashboard</h3>
+                    <p data-key="dashboard_description">Track your progress and view your mental health journey</p>
+                </div>
+
+                <div class="feature-card" data-screen="adminScreen">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 data-key="admin_panel">Admin Panel</h3>
+                    <p data-key="admin_description">Institutional analytics and monitoring (Demo)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Screen -->
+        <div id="registrationScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="register_title">Create Student Account</h2>
+                </div>
+            </div>
+
+            <div class="registration-container">
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="fullName" data-key="full_name">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" data-key="email_address">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="college" data-key="select_college">Select College</label>
+                        <select id="college" name="college" class="form-control" required>
+                            <option value="">Select College</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" data-key="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn" data-key="register">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Assessment Screen -->
+        <div id="assessmentScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="assessment_title">Mental Health Assessment</h2>
+                    <p data-key="assessment_subtitle">Complete the PHQ-9 and GAD-7 questionnaires to get personalized insights</p>
+                </div>
+            </div>
+
+            <!-- Assessment Selection -->
+            <div id="assessmentSelection" class="assessment-step active">
+                <div class="assessment-options">
+                    <div class="assessment-option" data-type="phq9">
+                        <div class="assessment-card">
+                            <h3 data-key="phq9_title">PHQ-9 Depression Screening</h3>
+                            <p data-key="phq9_description">9 questions about depression symptoms over the past 2 weeks</p>
+                            <button class="btn" data-key="start_phq9">Start PHQ-9</button>
+                        </div>
+                    </div>
+
+                    <div class="assessment-option" data-type="gad7">
+                        <div class="assessment-card">
+                            <h3 data-key="gad7_title">GAD-7 Anxiety Screening</h3>
+                            <p data-key="gad7_description">7 questions about anxiety symptoms over the past 2 weeks</p>
+                            <button class="btn" data-key="start_gad7">Start GAD-7</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assessment Questions -->
+            <div id="assessmentQuestions" class="assessment-step">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span data-key="question">Question</span> 
+                        <span id="currentQuestion">1</span> of <span id="totalQuestions">9</span>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <h3 id="questionText" class="question-text"></h3>
+                    <div id="questionOptions" class="question-options"></div>
+                </div>
+
+                <div class="question-navigation">
+                    <button id="prevQuestion" class="btn btn-secondary" data-key="previous">Previous</button>
+                    <button id="nextQuestion" class="btn" data-key="next">Next</button>
+                </div>
+            </div>
+
+            <!-- Assessment Results -->
+            <div id="assessmentResults" class="assessment-step">
+                <div class="results-container">
+                    <h3 id="resultTitle" data-key="results_title">Your Assessment Results</h3>
+                    
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="scoreNumber" class="score-number">0</span>
+                            <span id="scoreTotal" class="score-total">/ 27</span>
+                        </div>
+                        <div id="riskLevel" class="risk-level"></div>
+                    </div>
+
+                    <div class="recommendations">
+                        <h4 data-key="recommendations_title">Personalized Recommendations</h4>
+                        <div id="recommendationsList" class="recommendations-list"></div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn" data-screen="chatScreen" data-key="talk_to_ai">Talk to AI Support</button>
+                        <button class="btn btn-secondary" data-screen="resourcesScreen" data-key="explore_resources">Explore Resources</button>
+                        <button id="retakeAssessment" class="btn btn-secondary" data-key="retake_assessment">Take Another Assessment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Screen -->
+        <div id="chatScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="ai_assistant_title">AI Support Assistant</h2>
+                    <p data-key="ai_assistant_subtitle">Get immediate support and guidance. I'm here to help 24/7.</p>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message bot-message">
+                        <p data-key="chat_welcome">Hello! I'm your AI mental health assistant. How are you feeling today? I'm here to provide support and resources.</p>
+                    </div>
+                </div>
+
+                <div id="typing-indicator" class="typing-indicator hidden">
+                    <span></span><span></span><span></span>
+                    <span>AI is typing...</span>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="quick-responses">
+                        <button class="quick-response" data-message="I'm feeling anxious" data-key="feeling_anxious">I'm feeling anxious</button>
+                        <button class="quick-response" data-message="I can't sleep" data-key="cant_sleep">I can't sleep</button>
+                        <button class="quick-response" data-message="I'm stressed about exams" data-key="exam_stress">I'm stressed about exams</button>
+                        <button class="quick-response" data-message="I feel lonely" data-key="feeling_lonely">I feel lonely</button>
+                    </div>
+
+                    <div class="input-row">
+                        <textarea id="chatInput" class="chat-input" placeholder="Type your message here..." rows="1"></textarea>
+                        <button id="sendMessage" class="send-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crisis Alert -->
+            <div id="crisisAlert" class="crisis-alert hidden">
+                <h3 data-key="crisis_detected">Crisis Detected:</h3>
+                <p data-key="crisis_message">I'm very concerned about what you've shared. Please reach out for immediate help:</p>
+                <div class="crisis-actions">
+                    <button id="contactHelpline" class="crisis-btn" data-key="contact_helpline">Contact Crisis Helpline</button>
+                    <button id="findCounselor" class="crisis-btn" data-key="find_counselor">Find Counselor</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Screen -->
+        <div id="resourcesScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="resource_library_title">Resource Library</h2>
+                    <p data-key="resource_library_subtitle">Access educational content, exercises, and tools for mental wellness</p>
+                </div>
+            </div>
+
+            <div class="resources-container">
+                <div class="resources-categories">
+                    <!-- Resources will be dynamically generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Screen -->
+        <div id="bookingScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="booking_title">Book Appointment</h2>
+                    <p data-key="booking_subtitle">Schedule a session with our qualified mental health professionals</p>
+                </div>
+            </div>
+
+            <div class="booking-container">
+                <!-- Counselor Selection -->
+                <div id="counselorSelection" class="booking-step active">
+                    <h3 data-key="select_counselor">Select a Counselor</h3>
+                    <div id="counselorList" class="counselor-list">
+                        <!-- Counselors will be dynamically generated here -->
+                    </div>
+                    <button id="selectDateTime" class="btn" disabled data-key="select_date_time">Select Date & Time</button>
+                </div>
+
+                <!-- Date & Time Selection -->
+                <div id="dateTimeSelection" class="booking-step">
+                    <h3 data-key="select_date_time">Select Date & Time</h3>
+                    <div id="calendar" class="calendar">
+                        <!-- Calendar will be dynamically generated here -->
+                    </div>
+                    
+                    <div class="appointment-types">
+                        <h4 data-key="select_appointment_type">Select Appointment Type</h4>
+                        
+                        <div class="appointment-type">
+                            <input type="radio" id="individual" name="appointmentType" value="individual">
+                            <label for="individual">
+                                <strong data-key="individual_session">Individual Session</strong>
+                                <span data-key="individual_session_desc">One-on-one counseling session (50 minutes)</span>
+                            </label>
+                        </div>
+
+                        <div class="appointment-type">
+                            <input type="radio" id="group" name="appointmentType" value="group">
+                            <label for="group">
+                                <strong data-key="group_session">Group Session</strong>
+                                <span data-key="group_session_desc">Group therapy session (60 minutes)</span>
+                            </label>
+                        </div>
+
+                        <div class="appointment-type">
+                            <input type="radio" id="crisis" name="appointmentType" value="crisis">
+                            <label for="crisis">
+                                <strong data-key="crisis_intervention">Crisis Intervention</strong>
+                                <span data-key="crisis_intervention_desc">Immediate support (30 minutes)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="confirmAppointment" class="btn" data-key="confirm_appointment">Confirm Appointment</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboardScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="my_dashboard_title">My Dashboard</h2>
+                    <p data-key="my_dashboard_subtitle">Track your mental health journey and progress</p>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h3 data-key="mood_tracking">Mood Tracking</h3>
+                    <div class="mood-chart">
+                        <!-- Mood tracking chart will go here -->
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3 data-key="assessment_history">Assessment History</h3>
+                    <div class="assessment-history">
+                        <!-- Assessment history will go here -->
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3 data-key="recent_activities">Recent Activities</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <span class="activity-text" data-key="activity1">Completed PHQ-9 assessment</span>
+                            <span class="activity-date" data-key="today">Today</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text" data-key="activity2">Used breathing exercise</span>
+                            <span class="activity-date" data-key="yesterday">Yesterday</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text" data-key="activity3">Booked appointment with Dr. Johnson</span>
+                            <span class="activity-date" data-key="2_days_ago">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3 data-key="quick_actions">Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="btn" data-screen="chatScreen" data-key="chat_support">Chat Support</button>
+                        <button class="btn btn-secondary" data-screen="bookingScreen" data-key="book_session">Book Session</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Screen -->
+        <div id="adminScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" data-target="landingScreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 12H5m7-7l-7 7 7 7"/>
+                    </svg>
+                </button>
+                <div>
+                    <h2 data-key="admin_dashboard_title">Admin Dashboard</h2>
+                    <p data-key="admin_dashboard_subtitle">Institutional analytics and monitoring (Demo)</p>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">1,247</span>
+                        <span class="stat-label" data-key="total_students">Total Students</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">843</span>
+                        <span class="stat-label" data-key="active_users">Active Users</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label" data-key="crisis_alerts">Crisis Alerts</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">156</span>
+                        <span class="stat-label" data-key="appointments">Appointments</span>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <h3 data-key="usage_analytics">Usage Analytics</h3>
+                    <div class="analytics-chart">
+                        <!-- Analytics chart will go here -->
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <h3 data-key="crisis_monitoring">Crisis Monitoring</h3>
+                    <div class="crisis-alerts">
+                        <div class="alert-item medium">
+                            <strong data-key="medium_priority">Medium Priority:</strong>
+                            <span data-key="medium_priority_desc">Student ID #STU456 - Elevated anxiety scores</span>
+                        </div>
+                        <div class="alert-item high">
+                            <strong data-key="high_priority">High Priority:</strong>
+                            <span data-key="high_priority_desc">Crisis keywords detected in chat - Student ID #STU789</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-key="student_login">Student Login</h3>
+                    <button id="closeLoginModal" class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="studentId" data-key="student_id">Student ID</label>
+                            <input type="text" id="studentId" name="studentId" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword" data-key="password">Password</label>
+                            <input type="password" id="loginPassword" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn" data-key="login">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-key="success">Success!</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage"></p>
+                    <button class="btn" data-key="close" onclick="hideModalById('successModal')">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app-FIXED.js"></script>
+</body>
+</html>
